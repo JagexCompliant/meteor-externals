@@ -1,8 +1,8 @@
 
 
-version = "1.0.5"
+version = "1.0.6"
 
-project.extra["PluginName"] = "Example Plugin"
+project.extra["PluginName"] = "ExamplePlugin"
 project.extra["PluginDescription"] = "This is an example plugin"
 
 val pluginClass by rootProject.extra { "example.ExamplePlugin" }
