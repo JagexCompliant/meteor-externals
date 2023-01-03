@@ -15,9 +15,16 @@ open class ExamplePlugin : Plugin() {
 
     var config = configuration<ExampleConfig>()
 
-    override fun onStart() {}
+    override fun onStart() {
+        println("do something here")
 
-    override fun onStop() {}
+
+    }
+
+    override fun onStop() {
+        println("do something here")
+
+    }
 
 
 

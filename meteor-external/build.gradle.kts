@@ -1,6 +1,6 @@
 
 
-version = "1.0.1"
+version = "1.0.2"
 
 project.extra["PluginName"] = "Example Plugin"
 project.extra["PluginDescription"] = "This is an example plugin"

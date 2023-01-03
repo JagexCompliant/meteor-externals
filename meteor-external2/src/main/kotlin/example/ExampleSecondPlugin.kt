@@ -15,10 +15,15 @@ open class ExampleSecondPlugin : Plugin() {
 
     var config = configuration<ExampleSecondConfig>()
 
-    override fun onStart() {}
+    override fun onStart() {
+
+        println("do something here to")
+    }
 
 
-    override fun onStop() {}
+    override fun onStop() {
+        println("do something else here")
+    }
 
 
 }
