@@ -14,7 +14,7 @@ plugins{
 
 val apiRelease by rootProject.extra { "9.9.9" }
 
-project.extra["GithubUrl"] = "https://github.com/Tsillabak/Tsillabak-Plugins"
+project.extra["GithubUrl"] = "https://github.com/JagexCompliant/External-Plugins"
 apply<BootstrapPlugin>()
 subprojects {
     group = "meteor"
