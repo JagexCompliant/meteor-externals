@@ -15,7 +15,6 @@ import java.security.MessageDigest
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-
 open class BootstrapTask : DefaultTask() {
 
     private fun formatDate(date: Date?) = with(date ?: Date()) {
@@ -25,7 +24,31 @@ open class BootstrapTask : DefaultTask() {
     private fun hash(file: ByteArray): String {
         return MessageDigest.getInstance("SHA-512").digest(file).fold("", { str, it -> str + "%02x".format(it) }).toUpperCase()
     }
+    fun clearAndBuild() {
+        try {
+            val file = File("plugins.json")
+            if (file.exists()) {
+                file.writeText("")
+            } else {
+                file.createNewFile()
+            }
 
+            val pluginsReleaseDir = File("plugin-release")
+            if (!pluginsReleaseDir.exists()) {
+                pluginsReleaseDir.mkdir()
+            } else {
+                project.rootProject.delete(project.rootProject.fileTree(mapOf(
+                    "dir" to "plugin-release",
+                    "include" to "**/*.jar",
+                    "exclude" to "**/*-sources.jar"
+                )))
+            }
+
+
+        } catch (e: Exception) {
+            println("An error occurred while clearing and building: ${e.message}")
+        }
+    }
     private fun getBootstrap(filename: String): JSONArray? {
         val bootstrapFile = File(filename).readLines()
 
@@ -34,6 +57,11 @@ open class BootstrapTask : DefaultTask() {
 
     @TaskAction
     fun boostrap() {
+
+
+
+            clearAndBuild()
+
         if (project == project.rootProject) {
             val bootstrapDir = File("${project.projectDir}")
             val bootstrapReleaseDir = File("${project.projectDir}/plugin-release")
@@ -53,7 +81,7 @@ open class BootstrapTask : DefaultTask() {
                     releases.add(JsonBuilder(
                             "version" to it.project.version,
                             "date" to formatDate(Date()),
-                            "url" to "${project.rootProject.extra.get("GithubUrl")}/blob/master/plugin-release/${it.project.name}-${it.project.version}.jar",
+                            "url" to "${project.rootProject.extra.get("GithubUrl")}/blob/main/plugin-release/${it.project.name}-${it.project.version}.jar",
                             "sha512sum" to hash(plugin.readBytes())
                     ))
 

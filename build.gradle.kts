@@ -16,6 +16,11 @@ val apiRelease by rootProject.extra { "9.9.9" }
 
 project.extra["GithubUrl"] = "https://github.com/JagexCompliant/meteor-externals"
 apply<BootstrapPlugin>()
+
+
+
+
+
 subprojects {
     group = "meteor"
     project.extra["ProjectSupportUrl"] = "https://discord.gg/mhJpd9yc"
