@@ -81,7 +81,7 @@ open class BootstrapTask : DefaultTask() {
                     releases.add(JsonBuilder(
                             "version" to it.project.version,
                             "date" to formatDate(Date()),
-                            "url" to "${project.rootProject.extra.get("GithubUrl")}/blob/main/plugin-release/${it.project.name}-${it.project.version}.jar",
+                            "url" to "${project.rootProject.extra.get("GithubUrl")}/raw/main/plugin-release/${it.project.name}-${it.project.version}.jar",
                             "sha512sum" to hash(plugin.readBytes())
                     ))
 
